@@ -1,0 +1,405 @@
+notepad backend/database_schema.sql # Windows NotepadCopy the ENTIRE 
+content from the "Complete Database Schema - Ready to Deploy" artifact 
+above and paste it into this file.Save and close the file.File 2: Data 
+Collectorbash# Open the file code backend/data_collector.py # OR
+nano backend/data_collector.pyCopy the ENTIRE content from the "Manchester United Data Collector" artifact and paste it into this file.Save and close.File 3: Advanced Scraperbashcode backend/advanced_scraper.pyCopy the ENTIRE content from the "Advanced Web Scraper for Match Data" artifact and paste it.Save and close.File 4: Analysis Modulesbashcode backend/analysis_modules.pyCopy the ENTIRE content from the "Manchester United Analysis Modules" artifact and paste it.Save and close.File 5: ML Modelsbashcode backend/ml_models.pyCopy the ENTIRE content from the "Machine Learning Models for Match Prediction" artifact and paste it.Save and close.File 6: Automated Reportsbashcode backend/automated_reports.pyCopy the ENTIRE content from the "Automated Reporting & Notification System" artifact and paste it.Save and close.File 7: Monitoring Dashboardbashcode backend/monitoring_dashboard.pyCopy the ENTIRE content from the "System Monitoring & Testing Suite" artifact and paste it.Save and close.File 8: Main Entry Pointbashcode backend/main.pyCopy this content:python"""
+Main entry point for Google Cloud Functions
+All function entry points for the MUFC Analytics system
+"""
+
+from data_collector import collect_weekly_data, collect_match_day_data
+from advanced_scraper import run_scraping_job
+from ml_models import run_ml_training
+from automated_reports import run_weekly_reporting, check_match_results
+from monitoring_dashboard import run_system_monitoring
+
+# Cloud Function entry points - these names must match deployment commands
+def weekly_data_collection(request):
+    """Weekly data collection endpoint"""
+    return collect_weekly_data(request)
+
+def matchday_data_collection(request):
+    """Match day data collection endpoint"""
+    return collect_match_day_data(request)
+
+def advanced_scraping(request):
+    """Advanced web scraping endpoint"""
+    return run_scraping_job(request)
+
+def ml_training(request):
+    """ML model training endpoint"""
+    return run_ml_training(request)
+
+def weekly_reporting(request):
+    """Weekly reporting endpoint"""
+    return run_weekly_reporting(request)
+
+def match_results_check(request):
+    """Match results checking endpoint"""
+    return check_match_results(request)
+
+def system_monitoring(request):
+    """System monitoring endpoint"""
+    return run_system_monitoring(request)
+
+# Health check endpoint
+def health_check(request):
+    """Simple health check for all functions"""
+    return {
+        'status': 'healthy',
+        'message': 'MUFC Analytics system is running',
+        'functions': [
+            'weekly_data_collection',
+            'matchday_data_collection', 
+            'advanced_scraping',
+            'ml_training',
+            'weekly_reporting',
+            'system_monitoring'
+        ]
+    }Save and close.File 9: Backend Requirementsbashcode backend/requirements.txtCopy this content:requests==2.31.0
+psycopg2-binary==2.9.7
+beautifulsoup4==4.12.2
+selenium==4.15.2
+undetected-chrome==3.5.4
+fake-useragent==1.4.0
+pandas==2.0.3
+numpy==1.24.3
+plotly==5.17.0
+scikit-learn==1.3.0
+joblib==1.3.2
+jinja2==3.1.2
+functions-framework==3.4.0
+google-cloud-secret-manager==2.16.4
+google-cloud-sql-connector==1.4.3Save and close.File 10: Streamlit Dashboardbashcode frontend/streamlit_app.pyCopy the ENTIRE content from the "Manchester United Analytics Dashboard" artifact and paste it.Save and close.File 11: Frontend Requirementsbashcode frontend/requirements.txtCopy this content:streamlit==1.28.1
+plotly==5.17.0
+pandas==2.0.3
+numpy==1.24.3
+psycopg2-binary==2.9.7
+altair==5.1.2Save and close.File 12: READMEbashcode README.mdCopy this content:markdown# Manchester United Analytics System 2025/26
+
+Professional-grade analytics platform for Manchester United's Premier League season.
+
+## 🎯 Features
+- Automated data collection from 5+ sources
+- Real-time performance analysis  
+- Machine learning match predictions
+- Interactive web dashboard
+- Automated weekly reports
+- Shot map analysis with x,y coordinates
+- Formation effectiveness tracking
+
+## 🏗️ Architecture
+- **Backend**: Python Cloud Functions on Google Cloud
+- **Database**: PostgreSQL (Cloud SQL) 
+- **Frontend**: Streamlit dashboard
+- **Automation**: Cloud Scheduler
+- **Cost**: £0/month (free tiers)
+
+## 📊 Data Sources
+- Fantasy Premier League API
+- Football-Data.org API
+- BBC Sport (web scraping)
+- Understat.com (web scraping)
+- FBref.com (web scraping)
+
+## 📈 Analytics Modules
+- **Performance Analysis**: Home/away, opposition strength
+- **Player Analysis**: Top performers, individual stats
+- **Tactical Analysis**: Formations, shot maps, possession
+- **Machine Learning**: Match predictions, player performance
+
+## ⚽ Season 2025/26
+Tracking all 38 Premier League matches with comprehensive analytics.
+
+## 🚀 Status
+Ready for deployment to Google Cloud Platform.Save and close.File 13: Git Ignorebashcode .gitignoreCopy this content:# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets and Config
+.env
+secrets.toml
+*.key
+*.pem
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite3
+
+# Cache
+.cache/Save and close.Step 3.5: Verify All Files Have Contentbash# Check file sizes (none should be 0 bytes)
+ls -la backend/*.py backend/*.sql backend/*.txt
+ls -la frontend/*.py frontend/*.txt
+ls -la README.md .gitignore
+
+# Quick content check
+wc -l backend/*.py frontend/*.py
+# Should show line counts (none should be 0)You should see something like:
+     150 backend/advanced_scraper.py
+     200 backend/analysis_modules.py  
+     180 backend/automated_reports.py
+     120 backend/data_collector.py
+      25 backend/main.py
+     100 backend/ml_models.py
+     160 backend/monitoring_dashboard.py
+     250 frontend/streamlit_app.pyStep 3.6: Test Python Syntax (Optional)bash# Quick syntax check for Python files
+python3 -c "import ast; ast.parse(open('backend/main.py').read())"
+python3 -c "import ast; ast.parse(open('frontend/streamlit_app.py').read())"
+
+# If no errors appear, syntax is correct✅ Verification ChecklistCheck that you have:
+ 13 files created (9 backend + 2 frontend + 2 root)
+ All files have content (not empty)
+ No obvious syntax errors in Python files
+ Requirements.txt files contain dependencies
+ Database schema is complete SQL file
+🎯 Visual CheckYour project should now look like this:mufc-analytics-system/
+├── README.md                           ✅ 30+ lines
+├── .gitignoreClaude can make mistakes. Please double-check responses.touch README.md
+touch .gitignoreStep 3.3: Verify files were createdbash# Check backend files
+ls -la backend/
+# Should show 9 files
+
+# Check frontend files  
+ls -la frontend/
+# Should show 2 files
+
+# Check root files
+ls -la *.md *.gitignore
+# Should show README.md and .gitignoreStep 3.4: Now copy content into each fileI'll show you exactly how to do this. You can use any text editor:Text Editor Options:
+
+Windows: Notepad, VS Code, Sublime Text
+Mac: TextEdit, VS Code, Sublime Text
+Linux: nano, vim, VS Code, gedit
+File 1: Database Schemabash# Open the file (choose your preferred editor)
+code backend/database_schema.sql        # VS Code
+nano backend/database_schema.sql        # Command line editor
+notepad backend/database_schema.sql     # Windows NotepadCopy the ENTIRE content from the "Complete Database Schema - Ready to Deploy" artifact above and paste it into this file.Save and close the file.File 2: Data Collectorbash# Open the file
+code backend/data_collector.py
+# OR
+nano backend/data_collector.pyCopy the ENTIRE content from the "Manchester United Data Collector" artifact and paste it into this file.Save and close.File 3: Advanced Scraperbashcode backend/advanced_scraper.pyCopy the ENTIRE content from the "Advanced Web Scraper for Match Data" artifact and paste it.Save and close.File 4: Analysis Modulesbashcode backend/analysis_modules.pyCopy the ENTIRE content from the "Manchester United Analysis Modules" artifact and paste it.Save and close.File 5: ML Modelsbashcode backend/ml_models.pyCopy the ENTIRE content from the "Machine Learning Models for Match Prediction" artifact and paste it.Save and close.File 6: Automated Reportsbashcode backend/automated_reports.pyCopy the ENTIRE content from the "Automated Reporting & Notification System" artifact and paste it.Save and close.File 7: Monitoring Dashboardbashcode backend/monitoring_dashboard.pyCopy the ENTIRE content from the "System Monitoring & Testing Suite" artifact and paste it.Save and close.File 8: Main Entry Pointbashcode backend/main.pyCopy this content:python"""
+Main entry point for Google Cloud Functions
+All function entry points for the MUFC Analytics system
+"""
+
+from data_collector import collect_weekly_data, collect_match_day_data
+from advanced_scraper import run_scraping_job
+from ml_models import run_ml_training
+from automated_reports import run_weekly_reporting, check_match_results
+from monitoring_dashboard import run_system_monitoring
+
+# Cloud Function entry points - these names must match deployment commands
+def weekly_data_collection(request):
+    """Weekly data collection endpoint"""
+    return collect_weekly_data(request)
+
+def matchday_data_collection(request):
+    """Match day data collection endpoint"""
+    return collect_match_day_data(request)
+
+def advanced_scraping(request):
+    """Advanced web scraping endpoint"""
+    return run_scraping_job(request)
+
+def ml_training(request):
+    """ML model training endpoint"""
+    return run_ml_training(request)
+
+def weekly_reporting(request):
+    """Weekly reporting endpoint"""
+    return run_weekly_reporting(request)
+
+def match_results_check(request):
+    """Match results checking endpoint"""
+    return check_match_results(request)
+
+def system_monitoring(request):
+    """System monitoring endpoint"""
+    return run_system_monitoring(request)
+
+# Health check endpoint
+def health_check(request):
+    """Simple health check for all functions"""
+    return {
+        'status': 'healthy',
+        'message': 'MUFC Analytics system is running',
+        'functions': [
+            'weekly_data_collection',
+            'matchday_data_collection', 
+            'advanced_scraping',
+            'ml_training',
+            'weekly_reporting',
+            'system_monitoring'
+        ]
+    }Save and close.File 9: Backend Requirementsbashcode backend/requirements.txtCopy this content:requests==2.31.0
+psycopg2-binary==2.9.7
+beautifulsoup4==4.12.2
+selenium==4.15.2
+undetected-chrome==3.5.4
+fake-useragent==1.4.0
+pandas==2.0.3
+numpy==1.24.3
+plotly==5.17.0
+scikit-learn==1.3.0
+joblib==1.3.2
+jinja2==3.1.2
+functions-framework==3.4.0
+google-cloud-secret-manager==2.16.4
+google-cloud-sql-connector==1.4.3Save and close.File 10: Streamlit Dashboardbashcode frontend/streamlit_app.pyCopy the ENTIRE content from the "Manchester United Analytics Dashboard" artifact and paste it.Save and close.File 11: Frontend Requirementsbashcode frontend/requirements.txtCopy this content:streamlit==1.28.1
+plotly==5.17.0
+pandas==2.0.3
+numpy==1.24.3
+psycopg2-binary==2.9.7
+altair==5.1.2Save and close.File 12: READMEbashcode README.mdCopy this content:markdown# Manchester United Analytics System 2025/26
+
+Professional-grade analytics platform for Manchester United's Premier League season.
+
+## 🎯 Features
+- Automated data collection from 5+ sources
+- Real-time performance analysis  
+- Machine learning match predictions
+- Interactive web dashboard
+- Automated weekly reports
+- Shot map analysis with x,y coordinates
+- Formation effectiveness tracking
+
+## 🏗️ Architecture
+- **Backend**: Python Cloud Functions on Google Cloud
+- **Database**: PostgreSQL (Cloud SQL) 
+- **Frontend**: Streamlit dashboard
+- **Automation**: Cloud Scheduler
+- **Cost**: £0/month (free tiers)
+
+## 📊 Data Sources
+- Fantasy Premier League API
+- Football-Data.org API
+- BBC Sport (web scraping)
+- Understat.com (web scraping)
+- FBref.com (web scraping)
+
+## 📈 Analytics Modules
+- **Performance Analysis**: Home/away, opposition strength
+- **Player Analysis**: Top performers, individual stats
+- **Tactical Analysis**: Formations, shot maps, possession
+- **Machine Learning**: Match predictions, player performance
+
+## ⚽ Season 2025/26
+Tracking all 38 Premier League matches with comprehensive analytics.
+
+## 🚀 Status
+Ready for deployment to Google Cloud Platform.Save and close.File 13: Git Ignorebashcode .gitignoreCopy this content:# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets and Config
+.env
+secrets.toml
+*.key
+*.pem
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite3
+
+# Cache
+.cache/Save and close.Step 3.5: Verify All Files Have Contentbash# Check file sizes (none should be 0 bytes)
+ls -la backend/*.py backend/*.sql backend/*.txt
+ls -la frontend/*.py frontend/*.txt
+ls -la README.md .gitignore
+
+# Quick content check
+wc -l backend/*.py frontend/*.py
+# Should show line counts (none should be 0)You should see something like:
+     150 backend/advanced_scraper.py
+     200 backend/analysis_modules.py  
+     180 backend/automated_reports.py
+     120 backend/data_collector.py
+      25 backend/main.py
+     100 backend/ml_models.py
+     160 backend/monitoring_dashboard.py
+     250 frontend/streamlit_app.pyStep 3.6: Test Python Syntax (Optional)bash# Quick syntax check for Python files
+python3 -c "import ast; ast.parse(open('backend/main.py').read())"
+python3 -c "import ast; ast.parse(open('frontend/streamlit_app.py').read())"
+
+# If no errors appear, syntax is correct✅ Verification ChecklistCheck that you have:
+ 13 files created (9 backend + 2 frontend + 2 root)
+ All files have content (not empty)
+ No obvious syntax errors in Python files
+ Requirements.txt files contain dependencies
+ Database schema is complete SQL file
+🎯 Visual CheckYour project should now look like this:mufc-analytics-system/
+├── README.md                           ✅ 30+ lines
+├── .gitignoreClaude can make mistakes. Please double-check respons

@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets and Config
+.env
+secrets.toml
+*.key
+*.pem
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite3
+
+# Cache
+.cache/
+
+# Node modules (if using any JS tools)
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Google Cloud
+service-account-key.json
+gcloud-key.json
+
+# Local testing
+local_config.py
+test_credentials.py
